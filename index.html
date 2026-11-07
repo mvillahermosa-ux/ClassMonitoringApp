@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Monitoring App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loginPage" class="login-page">
+    <form id="loginForm" class="login-box">
+      <h1>Class Monitoring</h1>
+      <p>Android-Based Class Monitoring Application Using Barcode</p>
+      <input id="username" placeholder="Username" required>
+      <input id="password" type="password" placeholder="Password" required>
+      <select id="role">
+        <option>Administrator</option>
+        <option>Teacher</option>
+        <option>Student</option>
+      </select>
+      <button type="submit">Log In</button>
+    </form>
+  </div>
+
+  <div id="appPage" class="app hidden">
+    <aside class="sidebar">
+      <h2>Class Monitoring</h2>
+      <p>Barcode Attendance System</p>
+      <button data-page="dashboard">Dashboard</button>
+      <button data-page="students">Student Management</button>
+      <button data-page="attendance">Barcode Attendance</button>
+      <button data-page="reports">Attendance Reports</button>
+      <button id="logoutBtn" class="logout">Log Out</button>
+    </aside>
+
+    <main class="main">
+      <header>
+        <h1 id="pageTitle">Dashboard</h1>
+        <span id="welcomeUser"></span>
+      </header>
+
+      <section id="dashboard" class="page">
+        <h2>Attendance Overview</h2>
+
+        <div class="stats">
+          <div class="stat-card">
+            <h3>Total Students</h3>
+            <strong id="totalStudents">0</strong>
+          </div>
+          <div class="stat-card">
+            <h3>Present Today</h3>
+            <strong id="presentToday">0</strong>
+          </div>
+          <div class="stat-card">
+            <h3>Total Attendance Records</h3>
+            <strong id="totalRecords">0</strong>
+          </div>
+        </div>
+
+        <h2>Today's Attendance Summary</h2>
+
+        <div class="stats">
+          <div class="stat-card">
+            <h3>Total Time In Today</h3>
+            <strong id="timeInToday">0</strong>
+          </div>
+          <div class="stat-card">
+            <h3>Completed Attendance</h3>
+            <strong id="completedToday">0</strong>
+          </div>
+          <div class="stat-card">
+            <h3>Incomplete Attendance</h3>
+            <strong id="incompleteToday">0</strong>
+          </div>
+          <div class="stat-card">
+            <h3>Attendance Percentage</h3>
+            <strong id="attendancePercentage">0%</strong>
+          </div>
+        </div>
+
+        <h2>Daily Attendance Summary (Last 7 Days)</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Total Present</th>
+                <th>Completed</th>
+                <th>Incomplete</th>
+                <th>Attendance Percentage</th>
+              </tr>
+            </thead>
+            <tbody id="dailySummaryTable"></tbody>
+          </table>
+        </div>
+
+        <p>Welcome to the Class Monitoring Application.</p>
+      </section>
+
+      <section id="students" class="page hidden">
+        <h2>Register Student</h2>
+        <form id="studentForm" class="student-form">
+          <input id="studentId" placeholder="Student ID (e.g. 24BSIT-0017)" required>
+          <input id="studentName" placeholder="Complete Name" required>
+          <input id="studentSection" placeholder="Section" required>
+          <button type="submit">Register Student</button>
+        </form>
+
+        <h2>Registered Students</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Section</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="studentTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="attendance" class="page hidden">
+        <h2>Barcode Attendance</h2>
+        <p>Scan a student's barcode or enter the Student ID manually.</p>
+        <p><b>First scan:</b> Time In | <b>Second scan:</b> Time Out</p>
+
+        <div class="scan-controls">
+          <input id="attendanceId" placeholder="Enter or scan Student ID">
+          <button id="recordBtn">Record Attendance</button>
+          <button id="startScannerBtn">Open Camera Scanner</button>
+          <button id="stopScannerBtn" class="secondary">Stop Scanner</button>
+        </div>
+
+        <div id="reader"></div>
+
+        <h2>Attendance Records</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Section</th>
+                <th>Date</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="reports" class="page hidden">
+        <h2>Attendance Reports</h2>
+        <p>Filter attendance records by date and export the results to CSV.</p>
+
+        <div class="report-filters">
+          <div>
+            <label for="reportStartDate">Start Date</label>
+            <input type="date" id="reportStartDate">
+          </div>
+          <div>
+            <label for="reportEndDate">End Date</label>
+            <input type="date" id="reportEndDate">
+          </div>
+          <button id="filterReportBtn">Apply Filter</button>
+          <button id="resetReportBtn" class="secondary">Reset</button>
+        </div>
+
+        <div class="report-summary">
+          <div class="stat-card">
+            <h3>Filtered Attendance Records</h3>
+            <strong id="filteredRecordCount">0</strong>
+          </div>
+        </div>
+
+        <div class="report-actions">
+          <button id="exportCsvBtn">Export CSV</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Section</th>
+                <th>Date</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="reportTable"></tbody>
+          </table>
+        </div>
+        <p id="reportMessage" class="report-message"></p>
+      </section>
+    </main>
+  </div>
+
+  <div id="idModal" class="modal hidden">
+    <div class="id-card">
+      <h2>STUDENT IDENTIFICATION CARD</h2>
+      <p class="school-name">PATEROS TECHNOLOGICAL COLLEGE</p>
+      <div class="id-details">
+        <p><b>Name:</b> <span id="cardName"></span></p>
+        <p><b>Student ID:</b> <span id="cardId"></span></p>
+        <p><b>Section:</b> <span id="cardSection"></span></p>
+      </div>
+      <svg id="barcode"></svg>
+      <p class="barcode-number" id="barcodeNumber"></p>
+      <div class="no-print card-actions">
+        <button id="printBtn">Print ID Card</button>
+        <button id="closeCardBtn" class="secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <script src="script.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

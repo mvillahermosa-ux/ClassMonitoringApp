@@ -1,0 +1,576 @@
+
+/* =====================================
+   CLASS MONITORING APPLICATION
+   FINAL UI DESIGN
+===================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --background: #f1f5f9;
+  --white: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --green: #16a34a;
+  --red: #dc2626;
+  --orange: #d97706;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* LOGIN PAGE */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb, #60a5fa);
+}
+
+.login-box {
+  width: 100%;
+  max-width: 420px;
+  background: var(--white);
+  padding: 40px 32px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+
+.login-box h1 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.login-box p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.login-box input,
+.login-box select {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* INPUTS */
+
+input,
+select {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: var(--white);
+  color: var(--text);
+  transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* BUTTONS */
+
+button {
+  border: none;
+  background: var(--primary);
+  color: var(--white);
+  padding: 11px 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.login-box button,
+.student-form button {
+  width: 100%;
+}
+
+.secondary {
+  background: #64748b;
+}
+
+.secondary:hover {
+  background: #475569;
+}
+
+/* MAIN APPLICATION */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  background: #172554;
+  color: var(--white);
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar h2 {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+.sidebar p {
+  color: #bfdbfe;
+  font-size: 12px;
+  margin-bottom: 22px;
+}
+
+.sidebar button {
+  text-align: left;
+  width: 100%;
+  background: transparent;
+  color: #dbeafe;
+  padding: 13px 15px;
+  border-radius: 8px;
+}
+
+.sidebar button:hover {
+  background: #1e40af;
+  color: white;
+}
+
+.sidebar .logout {
+  margin-top: auto;
+  background: #991b1b;
+  color: white;
+}
+
+.sidebar .logout:hover {
+  background: #b91c1c;
+}
+
+/* MAIN CONTENT */
+
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 30px;
+}
+
+.main header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.main header h1 {
+  font-size: 27px;
+  color: #0f172a;
+}
+
+#welcomeUser {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* PAGE HEADINGS */
+
+.page h2 {
+  font-size: 19px;
+  margin: 22px 0 15px;
+  color: #1e293b;
+}
+
+.page > h2:first-child {
+  margin-top: 0;
+}
+
+.page > p {
+  color: var(--muted);
+  margin: 15px 0;
+}
+
+/* DASHBOARD CARDS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--white);
+  padding: 23px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--primary);
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.stat-card h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.stat-card strong {
+  font-size: 30px;
+  color: var(--primary);
+}
+
+/* STUDENT FORM */
+
+.student-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  background: var(--white);
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+/* TABLES */
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 15px 0 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+th {
+  background: #eff6ff;
+  color: #1e40af;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+td {
+  color: #334155;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* SCANNER */
+
+.scan-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 18px 0;
+}
+
+.scan-controls input {
+  flex: 1;
+  min-width: 200px;
+}
+
+#reader {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* REPORT FILTERS */
+
+.report-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 15px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.report-filters div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.report-filters label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.report-summary {
+  margin: 20px 0;
+}
+
+.report-summary .stat-card {
+  max-width: 300px;
+}
+
+.report-actions {
+  margin: 15px 0;
+}
+
+.report-message {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* MODAL / ID CARD */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.id-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  border-radius: 15px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.id-card h2 {
+  font-size: 19px;
+  color: #1e3a8a;
+  margin-bottom: 8px;
+}
+
+.school-name {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
+.id-details {
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.id-details p {
+  margin: 9px 0;
+}
+
+#barcode {
+  max-width: 100%;
+  height: auto;
+}
+
+.barcode-number {
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-top: 8px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    padding: 18px;
+  }
+
+  .sidebar h2 {
+    font-size: 20px;
+  }
+
+  .sidebar p {
+    margin-bottom: 8px;
+  }
+
+  .sidebar button {
+    padding: 10px 12px;
+  }
+
+  .sidebar .logout {
+    margin-top: 5px;
+  }
+
+  .main {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 15px;
+  }
+
+  .main header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .main header h1 {
+    font-size: 23px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-card h3 {
+    font-size: 12px;
+  }
+
+  .stat-card strong {
+    font-size: 24px;
+  }
+
+  .student-form {
+    grid-template-columns: 1fr;
+  }
+
+  .scan-controls {
+    flex-direction: column;
+  }
+
+  .scan-controls input,
+  .scan-controls button {
+    width: 100%;
+  }
+
+  .report-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .report-filters div,
+  .report-filters input,
+  .report-filters button {
+    width: 100%;
+  }
+
+  .card-actions {
+    flex-direction: column;
+  }
+
+  .card-actions button {
+    width: 100%;
+  }
+}
+
+/* PRINT STUDENT ID */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #idModal,
+  #idModal * {
+    visibility: visible;
+  }
+
+  #idModal {
+    position: absolute;
+    inset: 0;
+    background: white;
+  }
+
+  .id-card {
+    box-shadow: none;
+    border: 1px solid #333;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
